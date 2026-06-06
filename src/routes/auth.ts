@@ -38,15 +38,13 @@ router.post('/login', async (req: AuthRequest, res: Response) => {
     res.json({
       status: 200,
       message: 'Login successful',
-      data: {
-        token,
-        user: {
-          id: user.id,
-          username: user.username,
-          email: user.email,
-          name: user.name,
-          role: user.role,
-        },
+      token: token,
+      user: {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        name: user.name,
+        role: user.role,
       },
     });
   } catch (error) {
@@ -86,7 +84,8 @@ router.post('/register', async (req: AuthRequest, res: Response) => {
     res.status(201).json({
       status: 201,
       message: 'User registered successfully',
-      data: {
+      token: '',
+      user: {
         id: user.id,
         username: user.username,
         email: user.email,

@@ -513,7 +513,7 @@
     }
   ],
   "variable": [
-    { "key": "base_url", "value": "http://localhost:3000/api" },
+    { "key": "base_url", "value": "http://localhost:3005/api" },
     { "key": "jwt_token", "value": "" },
     { "key": "product_id", "value": "" },
     { "key": "transaction_id", "value": "" },

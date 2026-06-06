@@ -1,0 +1,9 @@
+node_modules
+dist
+.env
+*.log
+prisma/dev.db
+prisma/migrations
+README.md
+*.md
+postman_collection.json
