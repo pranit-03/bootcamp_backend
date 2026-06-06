@@ -1,0 +1,76 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  username  String   @unique
+  email     String   @unique
+  password  String
+  name      String
+  phone     String?
+  role      String   @default("SALES")
+  status    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Product {
+  id           String        @id @default(auto()) @map("_id") @db.ObjectId
+  sku          String        @unique
+  name         String
+  category     String
+  description  String?
+  price        Float
+  stock        Int           @default(0)
+  reorderLevel Int           @default(10)
+  barcode      String?       @unique
+  status       String        @default("IN_STOCK")
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  transactions Transaction[]
+
+  @@index([name])
+  @@index([category])
+  @@index([status])
+}
+
+model Transaction {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  type      String
+  date      DateTime @default(now())
+  productId String   @db.ObjectId
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  quantity  Int
+  amount    Float
+  status    String   @default("COMPLETED")
+  customer  String?
+  supplier  String?
+  notes     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([productId])
+  @@index([type])
+  @@index([date])
+  @@index([status])
+}
+
+model Supplier {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  contact   String
+  email     String   @unique
+  phone     String
+  status    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([name])
+}
