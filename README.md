@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # InvenTrack Backend
 
 Node.js/Express backend API for InvenTrack Inventory Management System with PostgreSQL and Prisma ORM.
@@ -423,3 +424,7 @@ For issues or questions:
 ## License
 
 ISC
+=======
+# bootcamp_backend
+backend all
+>>>>>>> 227b60e356590d3e7c0a221b5ede7e1a0d905e66
