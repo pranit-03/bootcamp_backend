@@ -9,7 +9,8 @@ const options: swaggerJsdoc.Options = {
       description: 'Inventory Management System REST API',
     },
     servers: [
-      { url: 'http://localhost:3005', description: 'Development server' },
+      { url: 'https://bootcamp-backend-9h1i.onrender.com', description: 'Production server' },
+      { url: 'http://localhost:3005', description: 'Local development server' },
     ],
     components: {
       securitySchemes: {

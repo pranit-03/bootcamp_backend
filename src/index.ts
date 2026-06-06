@@ -22,8 +22,19 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (Postman, curl) or any localhost origin
-      if (!origin || /^http:\/\/localhost(:\d+)?$/.test(origin)) {
+      // Allow requests with no origin (Postman, curl, server-to-server)
+      if (!origin) return callback(null, true);
+
+      const allowed = [
+        // any localhost port for local dev
+        /^http:\/\/localhost(:\d+)?$/,
+        // deployed frontend domains
+        /^https:\/\/.*\.onrender\.com$/,
+        /^https:\/\/.*\.vercel\.app$/,
+        /^https:\/\/.*\.netlify\.app$/,
+      ];
+
+      if (allowed.some((pattern) => pattern.test(origin))) {
         callback(null, true);
       } else {
         callback(new Error('Not allowed by CORS'));
